@@ -1,0 +1,8 @@
+to rectify "ERROR: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied"
+
+sudo addgroup --system docker
+sudo adduser $USER docker
+newgrp docker
+# And something needs to be done so $USER always runs in group `docker` on the `Ubuntu` WSL
+sudo chown root:docker /var/run/docker.sock
+sudo chmod g+w /var/run/docker.sock
